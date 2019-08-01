@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
-import {fetchHotelDetails} from '../redux/ActionCreators';
+import {bindActionCreators} from 'redux';
 import HotelDetails from './HotelDetailsComponent';
+import * as actions from '../redux/ActionCreators';
 import { Loading } from './LoadingComponent';
 
 const mapStateToProps = state => {
@@ -10,25 +11,21 @@ const mapStateToProps = state => {
   }
 }
 const mapDispatchToProps = (dispatch) => ({
-  fetchHotelDetails:()=>{dispatch(fetchHotelDetails)}
+  //fetchHotelDetails:()=>{dispatch(fetchHotelDetails)}
+    actions : bindActionCreators(actions, dispatch)
 	});
 
 class Ddown extends Component{
-	constructor(props){ 
-    super(props);
-      this.handleonClick = this.handleonClick.bind(this);
+	  
+    state = {
+      hotelId : 1001
+    }
 
-   }
-      
-    handleonClick(id) {
-    	this.props.fetchHotelDetails(id);
-      return(
-        <div>
-          <HotelDetails hotel= {this.props.hotel.hotel}
-            isLoading={this.props.hotel.isLoading}
-            errMess={this.props.hotel.errMess} />
-        </div>
-        );
+    handleonClick = (event) => {
+      console.log(event.target.value);
+      this.setState({hotelId:event.target.value})
+    	this.props.actions.fetchHotelDetails(event.target.value);
+      //console.log(this.props.hotel.data);
        }
 	render(){
 	if (this.props.isLoading) {
@@ -51,22 +48,28 @@ class Ddown extends Component{
             </div>
         );
     }
-    else if (this.props.hotels!= null){
-      console.log('The code was here');
-    	let hotels = this.props.hotels;
+    else {
+     // console.log('The code was here', this.props.hotels);
+    	let hotels = this.props.hotels.data;
+      // console.log(hotels.data);
         let optionItems = hotels.map((hotel) =>
-                <option key={hotel.hotelId} onClick={() => {this.handleonClick(hotel.hotelId)}}>{hotel.hotelName}</option>
+                <option value={hotel.hotelId} >{hotel.hotelName}</option>
           );
 
     	return(
-    	   <div>
-             <select>
-                {optionItems}
-             </select>
-           
-          </div>  
 
+                <div className="row">            
+            <select onClick={this.handleonClick.bind(this)}>
+                {optionItems}
+              </select>    
+                         
+
+                <HotelDetails hotel= {this.props.hotel.hotel}
+            isLoadingHotel={this.props.hotel.isLoadingHotel}
+            errMess={this.props.hotel.errMess} />
+         </div>
    		     );
+           //console.log(this.props.hotel.data);
     }
 
 	}

@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
-import Device from './DeviceComponent';
 import {connect} from 'react-redux';
-import {fetchDeviceDetails} from '../redux/ActionCreators';
+import {bindActionCreators} from 'redux';
+import Device from './DeviceComponent';
+import * as actions from '../redux/ActionCreators';
 import { Loading } from './LoadingComponent';
 
 
@@ -11,32 +12,27 @@ import { Loading } from './LoadingComponent';
   }
 }
 const mapDispatchToProps = (dispatch) => ({
-  fetchDeviceDetails:()=>{dispatch(fetchDeviceDetails)}
+    actions : bindActionCreators(actions, dispatch)
 });
    
 
   class HotelDetails extends Component{
-  constructor(props){ 
-    super(props);
-    this.handleonClick = this.handleonClick.bind(this);
-   }
-   componentDidMount(){
-   this.props.fetchDeviceDetails();
-    }  
-    handleonClick(id) {
-      this.props.fetchDeviceDetails(id);
-        return(
-          <div>
-           <Device device= {this.props.device.device}
-              isLoading={this.props.device.isLoading}
-              errMess={this.props.device.errMess}
-              />
-          </div>      
-          );
+     state = {
+      deviceId : "101b"
+    }
+
+  
    
+    handleonClick(event) {
+      console.log(event.target.value)
+    //  console.log(this.state.deviceId)
+      this.props.actions.fetchDeviceDetails(event.target.value);
+      console.log(this.props.device.device)
+     
 		 }
     render(){
-	if (this.props.isLoading) {
+      //console.log("Loading is "+this.props.isLoadingHotel);
+	if (this.props.isLoadingHotel) {
         return(
             <div className="container">
                 <div className="row">            
@@ -54,19 +50,31 @@ const mapDispatchToProps = (dispatch) => ({
             </div>
         );
     }
-    else if (this.props.hotel!= null){
-    	let hotel = this.props.hotel;
-        let optionItems = hotel.map((device) =>
-                <option key={device.deviceId} onClick={() => {this.handleonClick(device.deviceId)}}>{device.roomNo}</option>
+    else {
+
+      console.log(this.props.hotel);
+    	
+      let hotels = this.props.hotel.data;
+               console.log(hotels);
+
+        let optionItems = hotels.map((jkill) =>
+                <option value={jkill.deviceId}>{jkill.roomNo+")"}</option>
             );
 
     	return(
     	   <div>
-             <select>
+            <select onClick={this.handleonClick.bind(this)}>
                 {optionItems}
              </select>
+             <Device device= {this.props.device.device}
+              isLoadingDevice={this.props.device.isLoadingDevice}
+              errMess={this.props.device.errMess}
+              />
              
-           </div>
+          
+           
+          </div>   
+
    		);
     }
 	}

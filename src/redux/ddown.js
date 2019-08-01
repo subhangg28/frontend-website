@@ -1,6 +1,7 @@
 import * as ActionTypes from './ActionTypes';
 export const Hotels = (state={
 	isLoading: true,
+	isLoadingDevice:false,
 	errmess: null,
 	hotels:[],
 
