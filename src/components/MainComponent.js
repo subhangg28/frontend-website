@@ -1,34 +1,39 @@
 import React,{Component} from 'react';
-import {Navbar,NavbarBrand} from 'reactstrap';
 import Ddown from './DdownComponent';
-import HotelDetails from './HotelDetailsComponent';
-import './App.css';
+import {connect} from 'react-redux';
+import {Button} from 'reactstrap'
+import { fetchHotels} from '../redux/ActionCreators'
 
+const mapStateToProps = state => {
+  return{
+    hotels: state.hotels
+  }
+}
+const mapDispatchToProps = (dispatch) => ({
+  fetchHotels:() =>{dispatch(fetchHotels)}
+});
 class Main extends Component {
-  constructor(props){
+  constructor(props){ 
     super(props);
-    this.state={
-      hotels: HOTELS,
-      selectedHotel: null
-    };
-  }
-  onHotelSelect(hotelId){
-    this.setState({selectedHotel:hotelId});
-  }
-  render(){
-  return (
+      this.handleonClick = this.handleonClick.bind(this);
+
+   }
+   handleonClick(){
+    this.props.fetchHotels();
+      console.log(' Data fetched');  
+           }
+
+    render(){
+    return (
     <div>
-      <Navbar dark color="primary">
-        <div className="container">
-        <NavbarBrand href="/">Hotel List</NavbarBrand>
-        </div>
-      </Navbar>  
-       <Ddown hotels={this.state.hotels} onClick={(hotelId)=>this.onHotelSelect(hotelId)}/>
-       <HotelDetails hotel={this.state.hotels.filter((hotel)=> hotel.id=== this.state.selectedHotel )[0]} />
-    </div>
+      <Button onClick={() => {this.handleonClick()}}>Get Hotels List</Button>   
+       <Ddown hotels ={this.props.hotels.hotels}
+          isLoading={this.props.hotels.isLoading}
+          errMess= {this.props.hotels.errMess}  />
+      </div>
+
     );
+
   } 
 }
-
-
-export default Main;
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
