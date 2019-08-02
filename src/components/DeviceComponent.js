@@ -1,9 +1,14 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import { Loading } from './LoadingComponent';
-const Device=(props) => {
- 
-    if (props.isLoadingDevice) {
+ const mapStateToProps = state => {
+  return{
+    device: state.device
+  }
+}
+class Device extends Component{
+   render(){
+    if (this.props.device.isLoadingDevice) {
         return(
             <div className="container">
                 <div className="row">            
@@ -12,18 +17,18 @@ const Device=(props) => {
             </div>
         );
     }
-    else if (props.errMess) {
+    else if (this.props.device.errMess) {
         return(
             <div className="container">
                 <div className="row">            
-                    <h4>{props.errMess}</h4>
+                    <h4>{this.props.device.errMess}</h4>
                 </div>
             </div>
         );
     }
     else
     { 
-        let device = props.device.data;
+        let device = this.props.device.device.data;
         return (  
             <div>
 
@@ -38,6 +43,7 @@ const Device=(props) => {
             </div>   
         );
     }
+   } 
    
 }    
-export default Device;
+export default connect(mapStateToProps)(Device);

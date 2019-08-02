@@ -1,34 +1,34 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { bindActionCreators } from 'redux';
 import HotelDetails from './HotelDetailsComponent';
 import * as actions from '../redux/ActionCreators';
 import { Loading } from './LoadingComponent';
 
 const mapStateToProps = state => {
   return{
-    hotel:state.hotel
+    hotels:state.hotels
   }
 }
 const mapDispatchToProps = (dispatch) => ({
   //fetchHotelDetails:()=>{dispatch(fetchHotelDetails)}
-    actions : bindActionCreators(actions, dispatch)
+ actions: bindActionCreators(actions, dispatch)
 	});
 
 class Ddown extends Component{
 	  
-    state = {
-      hotelId : 1001
-    }
+    
 
     handleonClick = (event) => {
       console.log(event.target.value);
-      this.setState({hotelId:event.target.value})
+                console.log("the code was here")
+
+      //this.setState({hotelId:event.target.value})
     	this.props.actions.fetchHotelDetails(event.target.value);
       //console.log(this.props.hotel.data);
        }
 	render(){
-	if (this.props.isLoading) {
+	if (this.props.hotels.isLoading) {
         return(
 
             <div className="container">
@@ -39,18 +39,18 @@ class Ddown extends Component{
         );
     }
 
-    else if (this.props.errMess) {
+    else if (this.props.hotels.errMess) {
         return(
             <div className="container">
                 <div className="row">            
-                    <h4>{this.props.errMess}</h4>
+                    <h4>{this.props.hotels.errMess}</h4>
                 </div>
             </div>
         );
     }
     else {
      // console.log('The code was here', this.props.hotels);
-    	let hotels = this.props.hotels.data;
+    	let hotels = this.props.hotels.hotels.data;
       // console.log(hotels.data);
         let optionItems = hotels.map((hotel) =>
                 <option value={hotel.hotelId} >{hotel.hotelName}</option>
@@ -59,15 +59,12 @@ class Ddown extends Component{
     	return(
 
                 <div className="row">            
-            <select onClick={this.handleonClick.bind(this)}>
+            <select onChange={this.handleonClick.bind()}>
                 {optionItems}
-              </select>    
+              </select>
+              <HotelDetails/>  
+              </div>  
                          
-
-                <HotelDetails hotel= {this.props.hotel.hotel}
-            isLoadingHotel={this.props.hotel.isLoadingHotel}
-            errMess={this.props.hotel.errMess} />
-         </div>
    		     );
            //console.log(this.props.hotel.data);
     }

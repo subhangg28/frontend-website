@@ -24,7 +24,7 @@ export const fetchHotels =  () => async (dispatch) =>{
 }
 
 export const fetchHotelDetails= (id) => async (dispatch) =>{
-	console.log(id)
+	console.log("The code was here")
 	dispatch(hotelDetailsLoading());
 	return axios.get(baseUrl + '/hotels/details/' + id)
 	// .then(response =>JSON.stringify(response))
@@ -59,10 +59,10 @@ export const hotelDetailsFailed = (errmess) => ({
 	type:ActionTypes.HOTEL_DETAILS_FAILED,
 	payload: errmess
 });
-export const fetchDeviceDetails= (id) => async (dispatch) =>{
+export const fetchDeviceDetails= (no) => async (dispatch) =>{
 	dispatch(deviceDetailsLoading());
 	//console.log(id)
-	return axios.get(baseUrl + '/device/details/'+id)
+	return axios.get(baseUrl + '/device/details/'+no)
 	//.then(response => response.json())
 	.then(device => dispatch(addDeviceDetails(device)))
 	.catch(error => dispatch(deviceDetailsFailed(error.message)));
