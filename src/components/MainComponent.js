@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import Ddown from './DdownComponent';
+import Ddown from './Ddowncomponent';
 import {connect} from 'react-redux';
 import {Button} from 'reactstrap';
 import { bindActionCreators } from 'redux';

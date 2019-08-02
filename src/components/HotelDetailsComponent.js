@@ -17,22 +17,12 @@ const mapDispatchToProps = (dispatch) => ({
 });
    
 
-  class HotelDetails extends Component{
-    
-
-
-  
-    handleonClick= (event) => {
-      console.log(event.target.value)
-
-    //  console.log(this.state.deviceId)
-      this.props.actions.fetchDeviceDetails(event.target.value);
-     // console.log(this.props.device.device)
-     
+  class HotelDetails extends Component{  
+    handleonChange = (event) => {
+      this.props.actions.fetchDeviceDetails(event.target.value);     
 		 }
     render(){
-      //console.log("Loading is "+this.props.isLoadingHotel);
-	if (this.props.hotel.isLoadingHotel) {
+    	if (this.props.hotel.isLoadingHotel) {
         return(
             <div className="container">
                 <div className="row">            
@@ -51,27 +41,19 @@ const mapDispatchToProps = (dispatch) => ({
         );
     }
     else {
-
-      console.log(this.props.hotel);
-    	
       let abc = this.props.hotel.hotel.data;
-               console.log(abc);
-
-        let optionItems = abc.map((jkill) =>
-                <option value={jkill.deviceId}>{jkill.roomNo+")"}</option>
-            );
-
+         let optionItems = abc.map((jkill) =>
+            <option value={jkill.deviceId}>{jkill.roomNo+")"}</option>
+         );
+    
+     
     	return(
-    	   <div>
-            <select onChange={this.handleonClick.bind(this)}>
+    	  <div>
+            <select onChange={this.handleonChange.bind(this)}> 
                 {optionItems}
              </select>
-           <Device/>
-             
-          
-           
-          </div>   
-
+           <Device/>  
+        </div>   
    		);
     }
 	}

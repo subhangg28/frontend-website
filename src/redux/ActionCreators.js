@@ -24,15 +24,26 @@ export const fetchHotels =  () => async (dispatch) =>{
 }
 
 export const fetchHotelDetails= (id) => async (dispatch) =>{
-	console.log("The code was here")
+	console.log(id)
 	dispatch(hotelDetailsLoading());
-	return axios.get(baseUrl + '/hotels/details/' + id)
+	try {
+
+		let response = await axios.get(baseUrl + '/hotels/details/' + id);
+		dispatch(addHotelDetails(response));
+		//return response.data;
+	// 		return axios.get()
+	// 		.then(hotel => dispatch(addHotelDetails(hotel)))
+	// .catch(error => console.log(error))
+
+	}
+	catch(error) {
+		console.log("Error is: " + JSON.stringify(error));
+	}
 	// .then(response =>JSON.stringify(response))
 	//.then( (response) => {return(console.log(response))})
 	// 
 	// dispatch(hotelDetailsFailed(error.message))
-	.then(hotel => dispatch(addHotelDetails(hotel)))
-	.catch(error => console.log(error))
+	
 };
 
 export const hotelsLoading = () => ({
@@ -59,20 +70,22 @@ export const hotelDetailsFailed = (errmess) => ({
 	type:ActionTypes.HOTEL_DETAILS_FAILED,
 	payload: errmess
 });
-export const fetchDeviceDetails= (no) => async (dispatch) =>{
-	dispatch(deviceDetailsLoading());
-	//console.log(id)
-	return axios.get(baseUrl + '/device/details/'+no)
-	//.then(response => response.json())
-	.then(device => dispatch(addDeviceDetails(device)))
-	.catch(error => dispatch(deviceDetailsFailed(error.message)));
+export const fetchDeviceDetails= (no) => async (dispatch) => {
+	try {
+		let response = await axios.get(baseUrl + '/device/details/' +no);
+		console.log("In [fetchDeviceDetails] response is: " + JSON.stringify(response.data));
+		dispatch(addDeviceDetails(response));
+	}
+	catch(error) {
+		console.log("In [fetchDeviceDetails] error is: " + JSON.stringify(error));
+	}
 };
 export const deviceDetailsLoading = () => ({
 	type:ActionTypes.DEVICE_DETAILS_LOADING
 }); 
 export const addDeviceDetails= (device) =>({
-	type:ActionTypes.ADD_DEVICE_DETAILS,
-	payload:device
+	type: ActionTypes.ADD_DEVICE_DETAILS,
+	payload: device
 
 });
 export const deviceDetailsFailed = (errmess) => ({

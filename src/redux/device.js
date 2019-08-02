@@ -7,12 +7,30 @@ export const Device = (state={
 },action) => {
 	switch(action.type){
 		case ActionTypes.ADD_DEVICE_DETAILS:
-			
-			return {...state, isLoadingDevice:false, errmess: null, device: action.payload};
+			console.log("payload is: " + action.payload);
+			return {
+				...state, 
+				isLoadingDevice:false,
+				errmess: null, 
+				device: action.payload
+							};
+
 		case ActionTypes.DEVICE_DETAILS_LOADING:
-			return {...state, isLoadingDevice:true, errmess: null, device: []};
+			return {
+				...state, 
+				isLoadingDevice:true, 
+				errmess: null, 
+				device: []
+			};
+
 		case ActionTypes.DEVICE_DETAILS_FAILED:
-			return {...state, isLoadingDevice:true, errmess: action.payload, device: []};
+			return {
+				...state, 
+				isLoadingDevice:true, 
+				errmess: action.payload, 
+				device: []
+			};
+
 		default:
             return state;
 	}
