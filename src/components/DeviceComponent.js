@@ -30,17 +30,44 @@ class Device extends Component{
     { 
         let device = this.props.device.device.data;
         return (  
-            <div>
+            // <div>
 
-                         <h4> {device.hotelId} </h4> 
-                         <h4> {device.isRelayOn} </h4> 
-                         <h4> {device.roomNo} </h4> 
-                         <h4> {device.deviceId} </h4>                                                
-                         <h4> {device.powerValue} </h4> 
-                         <h4> {device.currentValue} </h4> 
-                         <h4> {device.voltageValue} </h4> 
-                         <h4> {device.lastHeartBeatAt} </h4> 
-            </div>   
+            //              <h4 className="center"> {device.hotelId} </h4> 
+            //              <h4 className="center"> {device.isRelayOn} </h4> 
+            //              <h4 className="center"> {device.roomNo} </h4> 
+            //              <h4 className="center"> {device.deviceId} </h4>                                                
+            //              <h4 className="center"> {device.powerValue} </h4> 
+            //              <h4 className="center"> {device.currentValue} </h4> 
+            //              <h4 className="center"> {device.voltageValue} </h4> 
+            //              <h4 className="center"> {device.lastHeartBeatAt} </h4> 
+            // </div>   
+             <div className='table-list'>
+             <table>
+             <thead>
+              <tr>
+               <th>Hotel ID</th>
+               <th>Device ID</th>
+               <th>Room No</th>
+               <th>Current Value</th>
+               <th>Voltage Value</th>
+               <th>Last Heart Beat At</th>
+               <th>is Relay On</th>
+                </tr>
+              </thead>
+       
+              <tbody>
+                  <tr>
+                      <td align ="center">{JSON.stringify(device.hotelId)}</td>
+                      <td align ="center">{device.deviceId}</td>
+                      <td align ="center">{JSON.stringify(device.roomNo)}</td>
+                      <td align ="center">{JSON.stringify(device.currentValue)}</td>
+                      <td align ="center">{JSON.stringify(device.voltageValue)}</td>
+                      <td align ="center">{JSON.stringify(device.lastHeartBeatAt)}</td>
+                      <td align ="center">{JSON.stringify(device.isRelayOn)}</td>
+                  </tr>    
+              </tbody>
+             </table>
+            </div>  
         );
     }
    } 

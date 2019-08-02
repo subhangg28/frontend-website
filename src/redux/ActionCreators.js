@@ -1,6 +1,6 @@
 import * as ActionTypes from './ActionTypes';
 import axios from 'axios';
-const baseUrl='http://localhost:8080';
+const baseUrl='http://10.1.6.248:8080';
 
 
 export const fetchHotels =  () => async (dispatch) =>{
@@ -28,7 +28,7 @@ export const fetchHotelDetails= (id) => async (dispatch) =>{
 	dispatch(hotelDetailsLoading());
 	try {
 
-		let response = await axios.get(baseUrl + '/hotels/details/' + id);
+		let response = await axios.get(baseUrl + '/hotels/details/?hotelId=' + id);
 		dispatch(addHotelDetails(response));
 		//return response.data;
 	// 		return axios.get()
@@ -72,7 +72,7 @@ export const hotelDetailsFailed = (errmess) => ({
 });
 export const fetchDeviceDetails= (no) => async (dispatch) => {
 	try {
-		let response = await axios.get(baseUrl + '/device/details/' +no);
+		let response = await axios.get(baseUrl + '/device/details/?deviceId=' +no);
 		console.log("In [fetchDeviceDetails] response is: " + JSON.stringify(response.data));
 		dispatch(addDeviceDetails(response));
 	}

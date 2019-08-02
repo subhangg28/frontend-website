@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import Ddown from './Ddowncomponent';
 import {connect} from 'react-redux';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import {Button} from 'reactstrap';
 import { bindActionCreators } from 'redux';
 import * as actions from '../redux/ActionCreators';
@@ -27,10 +28,16 @@ class Main extends Component {
 
     render(){
     return (
-    <div>
-      <Button onClick={() => {this.handleonClick()}}>Get Hotels List</Button>   
-      <Ddown/>   
+
+
+
+    <div className="container" align="center">
+
+
+     <Button  onClick={() => {this.handleonClick()}}> <h3>Get Hotels List</h3></Button> 
+        <Ddown/>
     </div>
+ 
 
     );
 

@@ -1,9 +1,11 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import HotelDetails from './HotelDetailsComponent';
 import * as actions from '../redux/ActionCreators';
 import { Loading } from './LoadingComponent';
+import HotelDetailsComponent from './HotelDetailsComponent';
 
 const mapStateToProps = state => {
   return{
@@ -31,7 +33,7 @@ class Ddown extends Component{
 	if (this.props.hotels.isLoading) {
         return(
 
-            <div className="container">
+            <div className="container" align="center">
                 <div className="row">            
                     <Loading />
                 </div>
@@ -41,7 +43,7 @@ class Ddown extends Component{
 
     else if (this.props.hotels.errMess) {
         return(
-            <div className="container">
+            <div className="container" align="center">
                 <div className="row">            
                     <h4>{this.props.hotels.errMess}</h4>
                 </div>
@@ -58,15 +60,52 @@ class Ddown extends Component{
 
     	return(
 
-                <div className="row">            
+
+
+
+
+      
+
+         <div className="container" align="center" >   
+          {/* <div className='table-list'>
+               <table>
+                <thead>
+                <tr>
+                <th>Hotel ID</th>
+                <th>Device ID</th>
+                <th>Room No</th>
+                </tr>
+                </thead>
+                <tbody>
+                {abc.map((doc) => <DataRow key={doc.deviceId}  />)}
+                  </tbody>
+                </table>
+                </div> */}
+                                   
+
+          
             <select onChange={this.handleonClick.bind()}>
+           
                 {optionItems}
-              </select>
-              <HotelDetails/>  
-              </div>  
+           
+             </select>
+              
+
+         
+         <HotelDetails/>
+
+         </div>  
+
+
+                
+   
+           //console.log(this.props.hotel.data);
+
+   
+
+             
                          
    		     );
-           //console.log(this.props.hotel.data);
     }
 
 	}

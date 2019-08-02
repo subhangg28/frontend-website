@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Device from './DeviceComponent';
 import * as actions from '../redux/ActionCreators';
 import { Loading } from './LoadingComponent';
@@ -19,7 +20,11 @@ const mapDispatchToProps = (dispatch) => ({
 
   class HotelDetails extends Component{  
     handleonChange = (event) => {
-      this.props.actions.fetchDeviceDetails(event.target.value);     
+      this.props.actions.fetchDeviceDetails(event.target.value);  
+     
+
+      
+       
 		 }
     render(){
     	if (this.props.hotel.isLoadingHotel) {
@@ -48,12 +53,23 @@ const mapDispatchToProps = (dispatch) => ({
     
      
     	return(
-    	  <div>
+
+        <div className="container" align="center">
+            
+          
+            
+            
             <select onChange={this.handleonChange.bind(this)}> 
                 {optionItems}
              </select>
-           <Device/>  
+         <div className="container" align="center">    
+             <Device/>
+        
+        </div>    
+
         </div>   
+
+  
    		);
     }
 	}
