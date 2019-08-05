@@ -21,10 +21,6 @@ const mapDispatchToProps = (dispatch) => ({
 class HotelDetails extends Component {
     handleonChange = (event) => {
         this.props.actions.fetchDeviceDetails(event.target.value);
-
-
-
-
     }
     render() {
         if (this.props.hotel.isLoadingHotel) {
@@ -55,10 +51,6 @@ class HotelDetails extends Component {
             return (
 
                 <div className="container" align="center">
-
-
-
-
                     <select onChange={this.handleonChange.bind(this)}>
                         <option selected disabled>Room No.</option>
                         {optionItems}
@@ -66,11 +58,9 @@ class HotelDetails extends Component {
                     <div className="container" align="center">
                         <Device />
 
-                    </div>
+                     </div>
 
                 </div>
-
-
             );
         }
     }

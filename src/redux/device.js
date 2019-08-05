@@ -7,7 +7,7 @@ export const Device = (state={
 },action) => {
 	switch(action.type){
 		case ActionTypes.ADD_DEVICE_DETAILS:
-			console.log("payload is: " + action.payload);
+			// console.log("payload is: " + action.payload);
 			return {
 				...state, 
 				isLoadingDevice:false,

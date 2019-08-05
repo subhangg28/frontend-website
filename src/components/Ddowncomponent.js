@@ -8,20 +8,20 @@ import { Loading } from './LoadingComponent';
 import HotelDetailsComponent from './HotelDetailsComponent';
 
 const mapStateToProps = state => {
-  return{
-    hotels:state.hotels
-  }
+    return{
+      hotels:state.hotels
+          }
 }
 const mapDispatchToProps = (dispatch) => ({
   //fetchHotelDetails:()=>{dispatch(fetchHotelDetails)}
- actions: bindActionCreators(actions, dispatch)
+  actions: bindActionCreators(actions, dispatch)
 	});
 
 class Ddown extends Component{
 	  
   handleonClick = (event) => {
-    console.log(event.target.value);
-              console.log("the code was here")
+    // console.log(event.target.value);
+    // console.log("the code was here")
 
     //this.setState({hotelId:event.target.value})
     this.props.actions.fetchHotelDetails(event.target.value);
@@ -50,11 +50,11 @@ class Ddown extends Component{
                     <Loading />
                 </div>
             </div>
-        );
-    }
+              );
+          }
 
     else if (this.props.hotels.errMess) {
-        return(
+      return(
             <div className="container" align="center">
                 <div className="row">            
                     <h4>{this.props.hotels.errMess}</h4>
@@ -66,11 +66,11 @@ class Ddown extends Component{
      console.log('The code was here', this.props.hotels);
     	let hotels = this.props.hotels.hotels.data;
       console.log(hotels.data);
-        let optionItems = hotels.map((hotel) =>
-                    <option value={hotel.hotelId} >{hotel.hotelName}</option>
+      let optionItems = hotels.map((hotel) =>
+        <option value={hotel.hotelId} >{hotel.hotelName}</option>
           );
 
-    	return(
+      return(
 
 
 
@@ -97,19 +97,13 @@ class Ddown extends Component{
 
         <div className="container" align="center" >   
             <select onChange={this.handleonClick.bind()}>
-           
-            
-            <option selected disabled>Hotel Name</option>
-
+             <option selected disabled>Hotel Name</option>
                 {optionItems}
-           
              </select>
-              
-
-         
+    
          <HotelDetails/>
 
-         </div>  
+        </div>  
 
 
                 

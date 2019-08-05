@@ -42,20 +42,20 @@ class Device extends Component{
             //              <h4 className="center"> {device.lastHeartBeatAt} </h4> 
             // </div>   
              <div className='table-list'>
-             <table>
-             <thead>
-              <tr>
-               <th>Hotel ID</th>
-               <th>Device ID</th>
-               <th>Room No</th>
-               <th>Current Value</th>
-               <th>Voltage Value</th>
-               <th>Last Heart Beat At</th>
-               <th>is Relay On</th>
-                </tr>
-              </thead>
+              <table>
+                  <thead>
+                  <tr>
+                    <th>Hotel ID</th>
+                    <th>Device ID</th>
+                    <th>Room No</th>
+                    <th>Current Value</th>
+                    <th>Voltage Value</th>
+                    <th>Last Heart Beat At</th>
+                    <th>is Relay On</th>
+                  </tr>
+                 </thead>
        
-              <tbody>
+                <tbody>
                   <tr>
                       <td align ="center">{JSON.stringify(device.hotelId)}</td>
                       <td align ="center">{device.deviceId}</td>
@@ -65,8 +65,8 @@ class Device extends Component{
                       <td align ="center">{JSON.stringify(device.lastHeartBeatAt)}</td>
                       <td align ="center">{JSON.stringify(device.isRelayOn)}</td>
                   </tr>    
-              </tbody>
-             </table>
+                </tbody>
+              </table>
             </div>  
         );
     }
