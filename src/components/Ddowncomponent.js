@@ -19,17 +19,29 @@ const mapDispatchToProps = (dispatch) => ({
 
 class Ddown extends Component{
 	  
+  handleonClick = (event) => {
+    console.log(event.target.value);
+              console.log("the code was here")
+
+    //this.setState({hotelId:event.target.value})
+    this.props.actions.fetchHotelDetails(event.target.value);
+    //console.log(this.props.hotel.data);
+     }
+  // renderTableData() {
+  //   return this.props.hotels.hotels.map((hotel, index) => {
+  //      const { hotelId, hotelName } = hotel //destructuring
+  //      return (
+  //         <tr key={id}>
+  //            <td>{id}</td>
+  //            <td>{name}</td>
+  //            <td>{age}</td>
+  //            <td>{email}</td>
+  //         </tr>
+  //      )
+  //   })
     
-
-    handleonClick = (event) => {
-      console.log(event.target.value);
-                console.log("the code was here")
-
-      //this.setState({hotelId:event.target.value})
-    	this.props.actions.fetchHotelDetails(event.target.value);
-      //console.log(this.props.hotel.data);
-       }
-	render(){
+    
+	render() {
 	if (this.props.hotels.isLoading) {
         return(
 
@@ -51,11 +63,11 @@ class Ddown extends Component{
         );
     }
     else {
-     // console.log('The code was here', this.props.hotels);
+     console.log('The code was here', this.props.hotels);
     	let hotels = this.props.hotels.hotels.data;
-      // console.log(hotels.data);
+      console.log(hotels.data);
         let optionItems = hotels.map((hotel) =>
-                <option value={hotel.hotelId} >{hotel.hotelName}</option>
+                    <option value={hotel.hotelId} >{hotel.hotelName}</option>
           );
 
     	return(
@@ -64,28 +76,31 @@ class Ddown extends Component{
 
 
 
-      
-
-         <div className="container" align="center" >   
-          {/* <div className='table-list'>
-               <table>
-                <thead>
-                <tr>
-                <th>Hotel ID</th>
-                <th>Device ID</th>
-                <th>Room No</th>
-                </tr>
-                </thead>
-                <tbody>
-                {abc.map((doc) => <DataRow key={doc.deviceId}  />)}
-                  </tbody>
-                </table>
-                </div> */}
+        
+        
+          
+        //   <div className='table-list'>
+         
+        //        <table>
+        //         <thead>
+        //         <tr>
+        //         <th>Hotel ID</th>
+        //         <th>Hotel Name</th>
+        //         </tr>
+        //         </thead>
+        //         <tbody>
+        //         {this.renderTableData()}
+        //           </tbody>
+        //         </table>
+        //         </div>
                                    
 
-          
+        <div className="container" align="center" >   
             <select onChange={this.handleonClick.bind()}>
            
+            
+            <option selected disabled>Hotel Name</option>
+
                 {optionItems}
            
              </select>
